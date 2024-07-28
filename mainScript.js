@@ -427,7 +427,7 @@ require([
   filterSelect.style.fontSize = "14px";
   filterSelect.innerHTML = `
     <option value="All">All</option>
-    <option value=0>Intern Review</option>
+    <option value=0>Past Intern Reviews</option>
     <option value=1>New Grad Reviews</option>
     <option value=2>Full Time Reviews</option>
     <option value=3>Senior Reviews</option>
