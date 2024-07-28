@@ -355,23 +355,27 @@ require([
     return serviceAreaParameters;
   }
 
-  async function executeServiceAreaTask(serviceAreaParameters) {
-    const { serviceAreaPolygons } = await serviceArea.solve(url, serviceAreaParameters);
-    serviceAreaGraphics = serviceAreaPolygons.features.map((g) => {
-      g.symbol = {
-        type: "simple-fill",
-        color: [225, 150, 0, 0.5],
-        outline: {
-          color: "white",
-          width: 0.5
+async function executeServiceAreaTask(serviceAreaParameters) {
+        const { serviceAreaPolygons } = await serviceArea.solve(url, serviceAreaParameters);
+ 
+        const transparencyLevels = [0.1, 0.3, 0.5, 0.7, 0.9];
+ 
+        serviceAreaGraphics = serviceAreaPolygons.features.map((g, index) => {
+            const transparency = transparencyLevels[index % transparencyLevels.length];
+            g.symbol = {
+                type: "simple-fill",
+                color: [126, 217, 87, transparency],
+                outline: {
+                    color: "white",
+                    width: 0.5
+                }
+            };
+            return g;
+        });
+        if (document.getElementById("toggleServiceArea").checked) {
+            view.graphics.addMany(serviceAreaGraphics, 0);
         }
-      };
-      return g;
-    });
-    if (document.getElementById("toggleServiceArea").checked) {
-      view.graphics.addMany(serviceAreaGraphics, 0);
     }
-  }
 
   function toggleServiceAreaVisibility() {
     if (document.getElementById("toggleServiceArea").checked) {
