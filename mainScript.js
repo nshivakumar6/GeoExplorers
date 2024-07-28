@@ -85,44 +85,7 @@ require([
         }
     });
 
-    myPointsFeatureLayer.renderer = {
-        type: "unique-value",
-        field: "category",
-        defaultSymbol: { type: "simple-fill" },
-        uniqueValueInfos: [{
-            value: "Shopping",
-            symbol: {
-                type: "simple-fill",
-                color: "blue"
-            }
-        }, {
-            value: "Hotels",
-            symbol: {
-                type: "simple-fill",
-                color: "green"
-            }
-        }, {
-            value: "Attractions",
-            symbol: {
-                type: "simple-fill",
-                color: "red"
-            }
-        }, {
-            value: "Recreation",
-            symbol: {
-                type: "simple-fill",
-                color: "yellow"
-            }
-        }],
-        visualVariables: [{
-            type: "opacity",
-            field: "POPULATION",
-            normalizationField: "SQ_KM",
-            stops: [{ value: 100, opacity: 0.15 },
-            { value: 1000, opacity: 0.90 }]
-        }]
-    };
-
+    
     myPointsFeatureLayer
         .when()
         .then(generateClusterConfig)
@@ -476,7 +439,7 @@ require([
     view: view,
     content: filterContainer,
     expandIconClass: "esri-icon-filter",
-    expandTooltip: "Filter Attributes"
+    expandTooltip: "Filter By Years Worked"
   });
 
   view.ui.add(filterWidget, "top-right");
