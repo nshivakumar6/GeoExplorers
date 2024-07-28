@@ -8,9 +8,10 @@
         html, body, #viewDiv {
             padding: 0;
             margin: 0;
-            height: 99%;
+            height: 100%;
             width: 100%;
         }
+
 
         .header-container {
             display: flex;
@@ -24,7 +25,7 @@
 
         .header-image {
             cursor: pointer;
-            width: 200px;
+            width: 100px;
             height: auto;
             margin-right: 15px;
         }
@@ -59,6 +60,24 @@
         .header-buttons {
             margin-left: auto;
         }
+
+        #info {
+            background-color: white;
+            width: 250px;
+            padding: 15px;
+            text-align: center; /* Center the text */
+          
+            font-size: 20px; /* Adjust the font size */
+            line-height: 1.2; /* Improve readability with line height */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+        .header-image-small {
+            cursor: pointer;
+            width: 40px; /* Smaller size for the second image */
+            height: auto;
+            margin-right: 15px;
+        }
     </style>
     <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.30/"></script>
@@ -69,10 +88,17 @@
 <body>
     <div slot="header" class="header-container">
         <img src="img/Logo Break - Combined PinPoint-Photoroom.png" class="header-image" id="logo_icon">
+        <img src="img/Map Upscaled.png" class="header-image-small" id="logo_icon">
+
     </div>
     <div id="viewDiv"></div>
 
-    <script src = "mainScript.js">
+    <script src="mainScript.js">
     </script>
+    <div id="info" class="esri-widget">
+        <h3>Select a feature to view the reviews from former Esri interns!</h3>
+        <h5>Add a review, find nearest reviewed locations, and filter reviews by employee experience.</h5>
+    </div>
 </body>
+
 </html>

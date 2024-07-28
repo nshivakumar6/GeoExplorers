@@ -105,6 +105,7 @@ require([
     });
 
     const view = new MapView({
+        
         container: "viewDiv",
         map: webmap,
         center: [-117.18267, 34.0589],
@@ -293,7 +294,8 @@ require([
     view: view,
     content: selectContainer,
     expandIconClass: "esri-icon-filter",
-    expandTooltip: "Select Location and Travel Mode"
+    expandTooltip: "Select Location and Travel Mode",
+    expandIcon: "car"
   });
 
   view.ui.add(expandWidget, "top-right");
@@ -326,7 +328,7 @@ require([
       symbol: {
         type: "simple-marker",
         color: "white",
-        size: 8
+        size: 0
       }
     });
     view.graphics.add(graphic);
@@ -439,7 +441,8 @@ require([
     view: view,
     content: filterContainer,
     expandIconClass: "esri-icon-filter",
-    expandTooltip: "Filter By Years Worked"
+    expandTooltip: "Filter By Years Worked",
+    expandIcon: "layer-filter"
   });
 
   view.ui.add(filterWidget, "top-right");
@@ -474,5 +477,18 @@ require([
       }
     }
   }
+   const expandInfo = new Expand({
+          expandTooltip: "Open for info",
+          collapseTooltip: "Close info",
+          expanded: true,
+          view: view,
+          content: document.getElementById("info"),
+          expandIcon: "information" 
+   });
+
+    view.ui.add(expandInfo, {
+        position: "top-left",
+        index: 1
+    });
 });
 
