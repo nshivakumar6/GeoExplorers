@@ -418,7 +418,7 @@ require([
 
   const filterLabel = document.createElement("label");
   filterLabel.for = "filterAttribute";
-  filterLabel.innerText = "Filter by Number of Years Worked: ";
+  filterLabel.innerText = "Filter by Esri Position: ";
 
   const filterSelect = document.createElement("select");
   filterSelect.id = "filterAttribute";
@@ -427,10 +427,10 @@ require([
   filterSelect.style.fontSize = "14px";
   filterSelect.innerHTML = `
     <option value="All">All</option>
-    <option value=0>0 to 1 Year</option>
-    <option value=1>1 to 2 Years</option>
-    <option value=2>2 to 3 years</option>
-    <option value=3>3+ years</option>
+    <option value=0>Intern Review</option>
+    <option value=1>New Grad Reviews</option>
+    <option value=2>Full Time Reviews</option>
+    <option value=3>Senior Reviews</option>
   `;
 
   filterContainer.appendChild(filterLabel);
