@@ -129,7 +129,8 @@ require([
     );
 
     const searchWidget = new Search({
-        view: view
+        view: view,
+        popupEnabled: false
     });
 
     const searchExpand = new Expand({
