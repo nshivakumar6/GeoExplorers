@@ -37,7 +37,7 @@
 
         // Reference a feature layer to edit
         const myPointsFeatureLayer = new FeatureLayer({
-        url: "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/HackthonProject_gdb/FeatureServer",
+        url: "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/AddTableRelation/FeatureServer",
         outFields: ["*"], // Ensure all fields are available for editing
         popupTemplate: {
         title: "Location: {place_name}",
@@ -71,8 +71,7 @@
 
         // Search widget
         const searchWidget = new Search({
-        view: view, 
-        popupEnabled: false
+        view: view
         });
 
         // Add the Search widget to an Expand widget
@@ -111,7 +110,15 @@
         // Create the Editor with the specified layer and a list of field configurations
         const editor = new Editor({
         view: view,
-        
+        layerInfos: [{
+        layer: myPointsFeatureLayer,
+        formTemplate: {
+        elements: [
+        { type: "field", fieldName: "place_name", label: "Place Name" },
+        { type: "field", fieldName: "rating", label: "Rating" }
+        ]
+        }
+        }]
         });
 
         // Function to handle the "Edit feature" action
@@ -171,5 +178,45 @@
         editor.viewModel.cancelWorkflow();
         });
 
+        // Create a div for filtering by amenity category
+        const filterDiv = document.createElement("div");
+        filterDiv.id = "amenity-filter";
+        filterDiv.className = "esri-widget";
+        filterDiv.innerHTML = `
+        <div class="filter-item" data-category="">All</div>
+        <div class="filter-item" data-category="Park">Park</div>
+        <div class="filter-item" data-category="School">School</div>
+        <div class="filter-item" data-category="Hospital">Hospital</div>
+        <!-- Add more categories as needed -->
+        `;
+        filterDiv.style.padding = "10px";
 
+        // Add the Filter div to an Expand widget
+        const filterExpand = new Expand({
+        view: view,
+        content: filterDiv,
+        expandIconClass: "esri-icon-filter", // Adds a filter icon to the Expand widget
+        expandTooltip: "Filter Features"
+        });
+
+        // Add the Filter Expand widget to the top right corner of the view
+        view.ui.add(filterExpand, {
+        position: "top-right"
+        });
+
+        // Handle filter change
+        document.getElementById("amenity-filter").addEventListener("click", (event) => {
+        const selectedCategory = event.target.getAttribute("data-category");
+        if (selectedCategory) {
+        myPointsFeatureLayer.definitionExpression = selectedCategory ? `amenity_category = '${selectedCategory}'` : "";
+        }
+        });
+
+        // Clear the filter when the Expand widget is collapsed
+        reactiveUtils.when(
+        () => !filterExpand.expanded,
+        () => {
+        myPointsFeatureLayer.definitionExpression = "";
+        }
+        );
         });
