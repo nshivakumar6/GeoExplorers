@@ -315,7 +315,7 @@ require([
   const toggleServiceAreaCheckbox = document.createElement("input");
   toggleServiceAreaCheckbox.type = "checkbox";
   toggleServiceAreaCheckbox.id = "toggleServiceArea";
-  toggleServiceAreaCheckbox.checked = true;
+  toggleServiceAreaCheckbox.checked = false;
   const toggleServiceAreaLabel = document.createElement("label");
   toggleServiceAreaLabel.for = "toggleServiceArea";
   toggleServiceAreaLabel.innerText = "Show Service Areas";
